@@ -7,7 +7,20 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: ['https://omaxemallsector19.in', 'http://localhost:3000'], // Replace with your actual frontend domain
+    optionsSuccessStatus: 200,
+    credentials: true // If you are using cookies, you need to set credentials to true
+  }));
+
+app.use((req, res, next) => {
+    res.cookie('example', 'value', {
+        httpOnly: true,
+        secure: true, // Ensure cookies are only sent over HTTPS
+        sameSite: 'Lax' // Adjust this based on your needs ('Strict' or 'None' with Secure)
+    });
+    next();
+});
 
 mongoose.connect('mongodb+srv://yashbaranwal121:yash2612@cluster0.c49ls.mongodb.net/omaxeDwarka?retryWrites=true&w=majority&appName=Cluster0')
 .then(() => {
