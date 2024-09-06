@@ -16,6 +16,7 @@ app.use(cors({
     credentials: true // If you are using cookies, you need to set credentials to true
   }));
 
+  
 // app.use((req, res, next) => {
 //     res.cookie('example', 'value', {
 //         httpOnly: true,
